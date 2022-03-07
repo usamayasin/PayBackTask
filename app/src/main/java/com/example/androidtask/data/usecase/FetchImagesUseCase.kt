@@ -30,6 +30,9 @@ class FetchImagesUseCase @Inject constructor(
                     onResponseComplete(response.error)
                     localRepo.insertImages(emptyList(),keyword)
                 }
+                else -> {
+                    onResponseComplete(response.error)
+                }
             }
         }
     }
