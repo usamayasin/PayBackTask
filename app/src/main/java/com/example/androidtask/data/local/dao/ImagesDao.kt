@@ -14,7 +14,7 @@ abstract class ImagesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertImages(imagesList: List<ImagesEntity>)
 
-    @Query("Select * FROM $TABLE_IMAGES")
-    abstract fun getAllImages(): Flow<List<ImagesEntity>>
+    @Query("Select * FROM images Where keyword LIKE :word ")
+    abstract fun getAllImages(word:String): Flow<List<ImagesEntity>>
 
 }

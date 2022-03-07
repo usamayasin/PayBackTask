@@ -10,7 +10,5 @@ class GetImagesFromLocalDB @Inject constructor(
     private val localRepo: LocalRepository
 ) {
     @ExperimentalCoroutinesApi
-    suspend operator fun invoke(): Flow<List<ImagesEntity>> {
-       return localRepo.getImages
-    }
+    suspend operator fun invoke()= localRepo.getImages
 }

@@ -11,6 +11,7 @@ import com.example.androidtask.data.usecase.GetImagesFromLocalDB
 import com.example.androidtask.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -18,6 +19,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
+@OptIn(ExperimentalCoroutinesApi::class)
 class HomeViewModel @Inject constructor(
     private val fetchImagesUseCase: FetchImagesUseCase,
     private val getImagesFromLocalDB: GetImagesFromLocalDB
@@ -33,6 +35,7 @@ class HomeViewModel @Inject constructor(
         fetchImagesFromLocalDB()
     }
 
+
     fun fetchImagesFromServer(
         page: Int = Constants.FIRST_PAGE,
         keyword: String = Constants.DEFAULT_KEYWORD_FRUIT
@@ -45,7 +48,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun fetchImagesFromLocalDB() {
+    private fun fetchImagesFromLocalDB() {
         showLoader()
         viewModelScope.launch(Dispatchers.IO) {
             getImagesFromLocalDB.invoke()
