@@ -15,8 +15,9 @@ class LocalRepository @Inject constructor(var imagesDao: ImagesDao) {
     var keyword: MutableStateFlow<String> = MutableStateFlow(Constants.DEFAULT_KEYWORD_FRUIT)
 
     fun insertImages(imageEntities: List<ImagesEntity>, word:String) {
-        keyword.value= word
+
         imagesDao.insertImages(imageEntities)
+        keyword.value= word
     }
 
    var getImages= keyword.flatMapLatest {
