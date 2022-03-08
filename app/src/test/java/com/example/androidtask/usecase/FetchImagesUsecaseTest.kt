@@ -1,8 +1,12 @@
 package com.example.androidtask.usecase
 
+import android.util.Log
 import com.example.androidtask.MockTestUtil
+import com.example.androidtask.data.local.entity.ImagesEntity
+import com.example.androidtask.data.local.entity.toDomainModel
 import com.example.androidtask.data.local.repository.AbstractLocalRepo
 import com.example.androidtask.data.local.repository.LocalRepository
+import com.example.androidtask.data.model.Image
 import com.example.androidtask.data.model.ImageList
 import com.example.androidtask.data.remote.DataState
 import com.example.androidtask.data.repository.Repository
@@ -10,6 +14,8 @@ import com.example.androidtask.data.usecase.FetchImagesUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
+import io.mockk.impl.annotations.RelaxedMockK
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
@@ -27,7 +33,7 @@ class FetchImagesUsecaseTest {
     @MockK
     private lateinit var repository: Repository
 
-    @MockK
+    @RelaxedMockK
     private lateinit var localRepo: AbstractLocalRepo
 
     @Before
@@ -36,7 +42,7 @@ class FetchImagesUsecaseTest {
     }
 
     @Test
-    fun `test invoking FetchimageInfoimagecase gives list of image`() = runBlocking {
+    fun `test invoking FetchimageInfoimagecase gives error`() = runBlocking {
         // Given
         val fetchImagesInfoUseCase = FetchImagesUseCase(repository, localRepo)
         val givenImages = MockTestUtil.getMockImages()
@@ -46,13 +52,39 @@ class FetchImagesUsecaseTest {
             .returns(flowOf(DataState.Error<ImageList>(DataState.CustomMessages.BadRequest)))
 
         // Invoke
-        val imagesListFlow = fetchImagesInfoUseCase(1,"fake"){
-            Assert.assertEquals(givenImages, it)
+         fetchImagesInfoUseCase(1,"fake"){
+            // Then
+            Assert.assertEquals(givenImages.error, it)
         }
 
-        // Then
-        MatcherAssert.assertThat(imagesListFlow, CoreMatchers.notNullValue())
+
+
 
 
     }
+/*
+    @Test
+    fun `test invoking FetchimageInfoimagecase gives imageList`() = runBlocking {
+        // Given
+        val fetchImagesInfoUseCase = FetchImagesUseCase(repository, localRepo)
+        val givenImages = MockTestUtil.getMockImages(1)
+
+        // When
+        coEvery { repository.getImages(page = any() , keyword = any()) }
+            .returns(flowOf(DataState.Error<ImageList>(DataState.CustomMessages.BadRequest)))
+
+        fetchImagesInfoUseCase.invoke(9,"rice"){
+
+        }
+
+        localRepo.getImages.collectLatest {
+          Assert.assertEquals(givenImages.hits, it)
+        }
+
+    }*/
+
+
+
+
+
 }

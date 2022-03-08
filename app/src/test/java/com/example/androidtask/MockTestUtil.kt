@@ -8,9 +8,7 @@ import kotlinx.coroutines.flow.flow
 class MockTestUtil {
     companion object {
 
-        fun getMockImages()= flow<DataState<ImageList>> {
-          DataState.Error<ImageList>(DataState.CustomMessages.BadRequest)
-        }
+        fun getMockImages()=   DataState.Error<ImageList>(DataState.CustomMessages.BadRequest)
         fun getMockImages(count: Int): ImageList {
             val images =  (0 until count).map {
                 ImagesEntity(

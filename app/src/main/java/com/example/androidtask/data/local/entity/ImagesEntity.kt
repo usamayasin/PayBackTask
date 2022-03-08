@@ -36,3 +36,6 @@ fun ImagesEntity.toImageModel(): Image {
     )
 }
 
+fun List<ImagesEntity>.toDomainModel()= map {
+    it.toImageModel()
+}
