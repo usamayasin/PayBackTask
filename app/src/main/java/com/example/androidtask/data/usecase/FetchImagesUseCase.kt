@@ -1,5 +1,6 @@
 package com.example.androidtask.data.usecase
 
+import com.example.androidtask.data.local.repository.AbstractLocalRepo
 import com.example.androidtask.data.local.repository.LocalRepository
 import com.example.androidtask.data.model.toDataBaseModel
 import com.example.androidtask.data.remote.DataState
@@ -10,7 +11,7 @@ import javax.inject.Inject
 
 class FetchImagesUseCase @Inject constructor(
     private val repository: Repository,
-    private val localRepo: LocalRepository
+    private val localRepo: AbstractLocalRepo
 ) {
 
     @ExperimentalCoroutinesApi
