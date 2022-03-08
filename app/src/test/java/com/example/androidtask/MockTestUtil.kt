@@ -17,7 +17,8 @@ class MockTestUtil {
                     comments = 10,
                     likes = 2,
                     views = 29,
-                    user = "fakeUser"
+                    user = "fakeUser",
+                    keyword="fake"
                 )
             }
             return ImageList(10,10,images)

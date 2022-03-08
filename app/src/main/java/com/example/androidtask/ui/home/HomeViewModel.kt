@@ -43,6 +43,7 @@ class HomeViewModel @Inject constructor(
         showLoader()
         viewModelScope.launch(Dispatchers.IO) {
             fetchImagesUseCase.invoke(page = page, keyword = keyword) {
+                hideLoading()
                 onResponseComplete(it)
             }
         }
