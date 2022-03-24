@@ -2,10 +2,13 @@ package com.example.androidtask
 
 import com.example.androidtask.data.local.entity.ImagesEntity
 import com.example.androidtask.data.model.ImageList
+import com.example.androidtask.data.remote.DataState
+import kotlinx.coroutines.flow.flow
 
 class MockTestUtil {
     companion object {
 
+        fun getMockImages()=   DataState.Error<ImageList>(DataState.CustomMessages.BadRequest)
         fun getMockImages(count: Int): ImageList {
             val images =  (0 until count).map {
                 ImagesEntity(
@@ -17,7 +20,8 @@ class MockTestUtil {
                     comments = 10,
                     likes = 2,
                     views = 29,
-                    user = "fakeUser"
+                    user = "fakeUser",
+                    keyword="fake"
                 )
             }
             return ImageList(10,10,images)

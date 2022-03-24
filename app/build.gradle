@@ -106,6 +106,7 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:2.1.0"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
     testImplementation "io.mockk:mockk:1.11.0"
+    testImplementation 'app.cash.turbine:turbine:0.7.0'
     testImplementation "com.squareup.okhttp3:mockwebserver:$okhttp_version"
     androidTestImplementation "io.mockk:mockk-android:1.11.0"
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

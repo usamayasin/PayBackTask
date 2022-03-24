@@ -3,6 +3,7 @@ package com.example.androidtask.di.modules
 import android.content.Context
 import com.example.androidtask.data.local.AppDatabase
 import com.example.androidtask.data.local.dao.ImagesDao
+import com.example.androidtask.data.local.repository.AbstractLocalRepo
 import com.example.androidtask.data.local.repository.LocalRepository
 import dagger.Module
 import dagger.Provides
@@ -17,7 +18,7 @@ class DataBaseModule {
 
     @Singleton
     @Provides
-    fun providesLocalRepository(imagesDao: ImagesDao): LocalRepository {
+    fun providesLocalRepository(imagesDao: ImagesDao): AbstractLocalRepo {
         return LocalRepository(imagesDao)
     }
 
